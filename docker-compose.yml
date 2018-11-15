@@ -12,11 +12,12 @@ services:
         build: ./project
         volumes:
             - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+        working_dir: ${APP_PATH_CONTAINER}
 
     postgres:
         image: postgres:9
         volumes:
-            - ${DB_PATH_HOST}:/var/lib/postgresql/dat
+            - ${DB_PATH_HOST}:/var/lib/postgresql/data
         restart: always
         environment:
             POSTGRES_PASSWORD: example
@@ -25,3 +26,10 @@ services:
         image: adminer
         ports:
             - "8080:8080"
+
+    composer:
+        image: composer
+        volumes:
+            - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+        working_dir: ${APP_PATH_CONTAINER}
+        command: composer install
