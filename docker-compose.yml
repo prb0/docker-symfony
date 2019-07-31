@@ -16,9 +16,6 @@ services:
 
     postgres:
         image: postgres:9
-        volumes:
-            - ${DB_PATH_HOST}:/var/lib/postgresql/data
-        restart: always
         environment:
             POSTGRES_PASSWORD: example
 
